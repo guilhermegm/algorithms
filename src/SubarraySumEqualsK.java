@@ -1,4 +1,5 @@
 import java.util.HashMap;
+import java.util.HashSet;
 
 public class SubarraySumEqualsK {
     public static int subarraySum_BruteForce(int[] nums, int k) {
@@ -15,6 +16,7 @@ public class SubarraySumEqualsK {
     }
 
     // https://leetcode.com/problems/subarray-sum-equals-k/discuss/272067/Python-99.57-(6-lines)-accumulator-+-hashtable
+    // https://www.youtube.com/watch?v=HbbYPQc-Oo4
     public static int subarraySum_ON(int[] nums, int k) {
         int count = 0, sum = 0;
         HashMap< Integer, Integer > map = new HashMap < > ();
@@ -28,11 +30,33 @@ public class SubarraySumEqualsK {
         return count;
     }
 
-    public static void main(String[] args) {
-        int[] nums = {3,4,7,0};
-        int k = 11;
+    public static int subarraySum2_ON(int[] nums, int k) {
+        int count = 0, sum = 0;
+        HashMap<Integer, Integer> map = new HashMap<>();
+        map.put(0, 1);
 
-        int result = subarraySum_ON(nums, k);
+        for (int i = 0; i < nums.length; i++) {
+            sum += nums[i];
+
+            if (map.containsKey(sum - k))
+                count += map.get(sum - k);
+
+            map.put(sum, map.getOrDefault(sum, 0) + 1);
+
+        }
+
+        return count;
+    }
+
+    public static void main(String[] args) {
+        // int[] nums = {3,4,7,2,-3,1,4,2};
+        // int k = 7;
+        // int[] nums = {0,0,0,0};
+        // int k = 0;
+        int[] nums = {3,4,7,2,-3,1,7,2};
+        int k = 7;
+
+        int result = subarraySum2_ON(nums, k);
         System.out.println(result);
     }
 }
