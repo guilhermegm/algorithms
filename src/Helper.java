@@ -1,3 +1,5 @@
+import java.util.List;
+
 public class Helper {
     public static void printMatrix(int[][] matrix) {
         for (int i = 0; i < matrix.length; i++) {         //this equals to the row in our matrix.
@@ -6,5 +8,9 @@ public class Helper {
             }
             System.out.println(); //change line on console as row comes to end in the matrix.
         }
+    }
+
+    public static void printList(List list) {
+        System.out.println(list.toString());
     }
 }
